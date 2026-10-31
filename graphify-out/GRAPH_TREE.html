@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>/ — graphify tree viewer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      margin: 20px 0 0 24px;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #1e3a56;
+    }
+    .controls {
+      margin: 20px 0 15px 24px;
+    }
+    button {
+      margin-right: 10px;
+      padding: 8px 18px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    button:active {
+      background: #004085;
+    }
+    #tree-container {
+      width: calc(100vw - 48px); /* Adjust for body margin/padding */
+      height: 85vh;
+      overflow: auto;
+      border-radius: 8px;
+      background: #fff;
+      margin-left: 24px;
+      margin-right: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid #ddd;
+    }
+    svg {
+      background: #fff;
+      border-radius: 8px;
+      display: block; /* Important for D3 */
+    }
+    .node circle {
+      stroke-width: 2.5px;
+    }
+    .node text { /* Base style for the <text> container */
+      font: 13px 'Segoe UI', sans-serif;
+      paint-order: stroke fill; /* Ensures text is readable over lines */
+      stroke: #fff; /* White halo */
+      stroke-width: 3px; /* Halo thickness */
+      stroke-linejoin: round;
+      stroke-opacity: 0.85; /* Halo opacity */
+    }
+    .link {
+      fill: none;
+      stroke-opacity: 0.7;
+      stroke-width: 2px;
+    }
+  </style>
+</head>
+<body>
+  <h1>/ — Knowledge Graph</h1>
+  <div class="controls">
+    <button onclick="expandAll()">Expand All</button>
+    <button onclick="collapseAll()">Collapse All</button>
+    <button onclick="resetView()">Reset View</button>
+  </div>
+  <div id="tree-container">
+    <svg id="tree-svg" width="6000" height="8000"></svg>
+  </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    const initialJsonData = {"name":"/","total_count":300,"children":[{"name":"app","total_count":132,"children":[{"name":"api","total_count":12,"children":[{"name":"routes.py","total_count":11,"children":[{"name":"analyze_document()","total_count":1,"children":[]},{"name":"analyze_text_json()","total_count":1,"children":[]},{"name":"API route definitions for TrustLens AI. Handles /api/analyze, /api/health,\u2026","total_count":1,"children":[]},{"name":"export_markdown()","total_count":1,"children":[]},{"name":"Generates and returns exportable Markdown report from analysis results.","total_count":1,"children":[]},{"name":"get_demo_samples()","total_count":1,"children":[]},{"name":"Health check endpoint reporting service health, runtime configuration, and\u2026","total_count":1,"children":[]},{"name":"health_check()","total_count":1,"children":[]},{"name":"JSON-based text analysis endpoint for programmatic API consumers.","total_count":1,"children":[]},{"name":"Returns the catalog of bundled synthetic demo samples for testing.","total_count":1,"children":[]},{"name":"Unified analysis endpoint accepting either a file upload (PDF, PNG, JPG, WEBP)\u2026","total_count":1,"children":[]}]},{"name":"__init__.py","total_count":1,"children":[]}]},{"name":"core","total_count":106,"children":[{"name":"analyzer.py","total_count":7,"children":[{"name":"._run_pipeline()","total_count":1,"children":[]},{"name":".analyze_file()","total_count":1,"children":[]},{"name":".analyze_text()","total_count":1,"children":[]},{"name":"Central analysis orchestrator for TrustLens AI. Coordinates extraction, Gemma 4\u2026","total_count":1,"children":[]},{"name":"DocumentAnalyzer","total_count":1,"children":[]},{"name":"Executes the full TrustLens AI verification pipeline on an uploaded file (PDF\u2026","total_count":1,"children":[]},{"name":"Executes the full TrustLens AI verification pipeline on raw text.","total_count":1,"children":[]}]},{"name":"config.py","total_count":6,"children":[{"name":".has_gemma_key()","total_count":1,"children":[]},{"name":".sanitized_key_hint()","total_count":1,"children":[]},{"name":"Application configuration for TrustLens AI. Loads settings from environment\u2026","total_count":1,"children":[]},{"name":"Returns True if a valid-format API key is provided.","total_count":1,"children":[]},{"name":"Safe server-side key hint for diagnostics without leaking credentials.","total_count":1,"children":[]},{"name":"Settings","total_count":1,"children":[]}]},{"name":"domain_checks.py","total_count":5,"children":[{"name":"._evaluate_domain()","total_count":1,"children":[]},{"name":".extract_domains_and_links()","total_count":1,"children":[]},{"name":"DomainAnalyzer","total_count":1,"children":[]},{"name":"Extracts domains from URLs and email addresses found in the text.","total_count":1,"children":[]},{"name":"Safe URL and domain analysis module for TrustLens AI. Extracts domains from\u2026","total_count":1,"children":[]}]},{"name":"evidence.py","total_count":9,"children":[{"name":"._estimate_page()","total_count":1,"children":[]},{"name":"._find_quote_in_text()","total_count":1,"children":[]},{"name":".verify_findings()","total_count":1,"children":[]},{"name":"Collapses consecutive whitespace to single space for tolerant matching.","total_count":1,"children":[]},{"name":"Cross-checks evidence quotes from Gemma against extracted source text. Returns:\u2026","total_count":1,"children":[]},{"name":"Evidence verification and provenance module for TrustLens AI. Verifies that AI\u2026","total_count":1,"children":[]},{"name":"EvidenceVerifier","total_count":1,"children":[]},{"name":"normalize_whitespace()","total_count":1,"children":[]},{"name":"Searches for quote in source text. First attempts exact match, then normalized\u2026","total_count":1,"children":[]}]},{"name":"extractor.py","total_count":15,"children":[{"name":".extract_from_image()","total_count":1,"children":[]},{"name":".extract_from_pdf()","total_count":1,"children":[]},{"name":".extract_from_text()","total_count":1,"children":[]},{"name":".validate_file_bytes()","total_count":1,"children":[]},{"name":"Base exception for document extraction failures.","total_count":1,"children":[]},{"name":"CorruptedFileError","total_count":1,"children":[]},{"name":"Document extraction and validation module for TrustLens AI. Handles digital PDF\u2026","total_count":1,"children":[]},{"name":"DocumentExtractor","total_count":1,"children":[]},{"name":"ExtractionError","total_count":1,"children":[]},{"name":"Extracts content from pasted text.","total_count":1,"children":[]},{"name":"Extracts text from PDF via PyMuPDF. If PDF is scanned (contains no text or\u2026","total_count":1,"children":[]},{"name":"FileOversizedError","total_count":1,"children":[]},{"name":"UnsupportedFileTypeError","total_count":1,"children":[]},{"name":"Validates actual file signatures (magic bytes) rather than relying only on\u2026","total_count":1,"children":[]},{"name":"Validates and prepares image for multimodal Gemma 4 analysis. Labels provenance\u2026","total_count":1,"children":[]}]},{"name":"gemma_client.py","total_count":17,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":"._build_retry_prompt()","total_count":1,"children":[]},{"name":"._build_text_prompt()","total_count":1,"children":[]},{"name":"._build_url()","total_count":1,"children":[]},{"name":"._clean_and_parse_json()","total_count":1,"children":[]},{"name":"._extract_content_from_response()","total_count":1,"children":[]},{"name":"._send_request()","total_count":1,"children":[]},{"name":".analyze()","total_count":1,"children":[]},{"name":"Base exception for Gemma client issues.","total_count":1,"children":[]},{"name":"GemmaApiKeyMissingError","total_count":1,"children":[]},{"name":"GemmaClient","total_count":1,"children":[]},{"name":"GemmaClientError","total_count":1,"children":[]},{"name":"GemmaSchemaValidationError","total_count":1,"children":[]},{"name":"Raised when Gemma output repeatedly fails schema validation.","total_count":1,"children":[]},{"name":"Raised when the Gemma API key is not configured.","total_count":1,"children":[]},{"name":"Sends extracted text (and optional image payload) to Gemma 4 via the Google AI\u2026","total_count":1,"children":[]},{"name":"Server-side Gemma 4 API client for TrustLens AI. Targeting Google AI Studio\u2026","total_count":1,"children":[]}]},{"name":"report.py","total_count":4,"children":[{"name":".generate_markdown()","total_count":1,"children":[]},{"name":"Builds a comprehensive, transparent Markdown report.","total_count":1,"children":[]},{"name":"Report generation module for TrustLens AI. Renders exportable Markdown and\u2026","total_count":1,"children":[]},{"name":"ReportBuilder","total_count":1,"children":[]}]},{"name":"rules.py","total_count":23,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":".evaluate()","total_count":1,"children":[]},{"name":".evaluate()","total_count":1,"children":[]},{"name":".evaluate()","total_count":1,"children":[]},{"name":".evaluate()","total_count":1,"children":[]},{"name":".evaluate()","total_count":1,"children":[]},{"name":".evaluate()","total_count":1,"children":[]},{"name":".evaluate()","total_count":1,"children":[]},{"name":".evaluate()","total_count":1,"children":[]},{"name":".evaluate()","total_count":1,"children":[]},{"name":".run()","total_count":1,"children":[]},{"name":"ConflictingClaimsRule","total_count":1,"children":[]},{"name":"Deterministic rules engine for TrustLens AI. Runs independently on extracted\u2026","total_count":1,"children":[]},{"name":"DeterministicRule","total_count":1,"children":[]},{"name":"Executes all deterministic rules against the source text.","total_count":1,"children":[]},{"name":"FreeEmailSenderRule","total_count":1,"children":[]},{"name":"LookalikeDomainRule","total_count":1,"children":[]},{"name":"MessagingAppMoveRule","total_count":1,"children":[]},{"name":"PaymentRequestRule","total_count":1,"children":[]},{"name":"RulesEngine","total_count":1,"children":[]},{"name":"UnrealisticOfferRule","total_count":1,"children":[]},{"name":"UrgencyPressureRule","total_count":1,"children":[]},{"name":"VagueRoleDetailsRule","total_count":1,"children":[]}]},{"name":"schemas.py","total_count":16,"children":[{"name":"AnalysisResponse","total_count":1,"children":[]},{"name":"AnalyzeTextRequest","total_count":1,"children":[]},{"name":"DocumentType","total_count":1,"children":[]},{"name":"ExtractionMetadata","total_count":1,"children":[]},{"name":"FindingCategory","total_count":1,"children":[]},{"name":"GemmaAnalysisResult","total_count":1,"children":[]},{"name":"GemmaFinding","total_count":1,"children":[]},{"name":"HealthResponse","total_count":1,"children":[]},{"name":"ProvenanceStatus","total_count":1,"children":[]},{"name":"Pydantic schemas and data models for TrustLens AI. Strictly defines model\u2026","total_count":1,"children":[]},{"name":"RiskLevel","total_count":1,"children":[]},{"name":"RuleHit","total_count":1,"children":[]},{"name":"ScoreBreakdown","total_count":1,"children":[]},{"name":"ScoreSignal","total_count":1,"children":[]},{"name":"SeverityLevel","total_count":1,"children":[]},{"name":"VerifiedFinding","total_count":1,"children":[]}]},{"name":"scoring.py","total_count":3,"children":[{"name":".calculate_score()","total_count":1,"children":[]},{"name":"ScoringEngine","total_count":1,"children":[]},{"name":"Transparent risk scoring engine for TrustLens AI. Combines verified AI findings\u2026","total_count":1,"children":[]}]},{"name":"__init__.py","total_count":1,"children":[]}]},{"name":"main.py","total_count":3,"children":[{"name":"rate_limit_middleware()","total_count":1,"children":[]},{"name":"serve_index()","total_count":1,"children":[]},{"name":"TrustLens AI - FastAPI Application Entrypoint Serves REST API endpoints and\u2026","total_count":1,"children":[]}]},{"name":"static","total_count":10,"children":[{"name":"app.js","total_count":10,"children":[{"name":"checkHealth()","total_count":1,"children":[]},{"name":"escapeHtml()","total_count":1,"children":[]},{"name":"handleFileSelected()","total_count":1,"children":[]},{"name":"hideError()","total_count":1,"children":[]},{"name":"loadSamples()","total_count":1,"children":[]},{"name":"renderResults()","total_count":1,"children":[]},{"name":"setLoading()","total_count":1,"children":[]},{"name":"showError()","total_count":1,"children":[]},{"name":"switchTab()","total_count":1,"children":[]},{"name":"updateCharCount()","total_count":1,"children":[]}]}]},{"name":"__init__.py","total_count":1,"children":[]}]},{"name":"CONTRIBUTING.md","total_count":10,"children":[{"name":"1. Core Engineering & Ethical Principles","total_count":1,"children":[]},{"name":"2. Local Development Setup","total_count":1,"children":[]},{"name":"3. Good First Issue Opportunities","total_count":1,"children":[]},{"name":"4. Submitting a Pull Request","total_count":1,"children":[]},{"name":"Contributing to TrustLens AI","total_count":1,"children":[]},{"name":"CONTRIBUTING.md","total_count":1,"children":[]},{"name":"Installation","total_count":1,"children":[]},{"name":"Prerequisites","total_count":1,"children":[]},{"name":"Running the Test Suite","total_count":1,"children":[]},{"name":"Starting the Development Server","total_count":1,"children":[]}]},{"name":"docker-compose.yml","total_count":15,"children":[{"name":"build","total_count":1,"children":[]},{"name":"container_name","total_count":1,"children":[]},{"name":"context","total_count":1,"children":[]},{"name":"dockerfile","total_count":1,"children":[]},{"name":"environment","total_count":1,"children":[]},{"name":"healthcheck","total_count":1,"children":[]},{"name":"interval","total_count":1,"children":[]},{"name":"ports","total_count":1,"children":[]},{"name":"restart","total_count":1,"children":[]},{"name":"retries","total_count":1,"children":[]},{"name":"services","total_count":1,"children":[]},{"name":"start_period","total_count":1,"children":[]},{"name":"test","total_count":1,"children":[]},{"name":"timeout","total_count":1,"children":[]},{"name":"trustlens","total_count":1,"children":[]}]},{"name":"docs","total_count":67,"children":[{"name":"build-status.md","total_count":5,"children":[{"name":"1. Milestone Execution Summary","total_count":1,"children":[]},{"name":"2. Test Execution Record","total_count":1,"children":[]},{"name":"3. Active Blockers & Next Actions","total_count":1,"children":[]},{"name":"build-status.md","total_count":1,"children":[]},{"name":"TrustLens AI - Build & Milestone Status","total_count":1,"children":[]}]},{"name":"demo-script.md","total_count":9,"children":[{"name":"1. Quick Pitch (15 Seconds)","total_count":1,"children":[]},{"name":"2. Live Demo Steps (85 Seconds)","total_count":1,"children":[]},{"name":"3. Technology & Prize Integrations Walkthrough (20 Seconds)","total_count":1,"children":[]},{"name":"demo-script.md","total_count":1,"children":[]},{"name":"Step 1: Uploading a Suspicious Offer (20 Seconds)","total_count":1,"children":[]},{"name":"Step 2: Explainable Scoring & Verbatim Evidence (30 Seconds)","total_count":1,"children":[]},{"name":"Step 3: Markdown Export & Report Generation (15 Seconds)","total_count":1,"children":[]},{"name":"Step 4: Comparison with Legitimate Offer Letter (20 Seconds)","total_count":1,"children":[]},{"name":"TrustLens AI \u2014 2-Minute Demonstration Script & Judge Walkthrough","total_count":1,"children":[]}]},{"name":"deployment.md","total_count":14,"children":[{"name":"1. Hosting Architecture Overview","total_count":1,"children":[]},{"name":"2. Step-by-Step Server Setup Guide","total_count":1,"children":[]},{"name":"3. Deployment Verification Checklist","total_count":1,"children":[]},{"name":"4. Current Status & Honest Reporting","total_count":1,"children":[]},{"name":"deployment.md","total_count":1,"children":[]},{"name":"Key Architectural Strengths:","total_count":1,"children":[]},{"name":"Step 1: Provision Cloudways Application","total_count":1,"children":[]},{"name":"Step 2: SSH Access & Code Deployment","total_count":1,"children":[]},{"name":"Step 3: Python Virtual Environment & Dependencies","total_count":1,"children":[]},{"name":"Step 4: Configure Production Environment Variables","total_count":1,"children":[]},{"name":"Step 5: Configure Process Supervision (Supervisor)","total_count":1,"children":[]},{"name":"Step 6: Configure Cloudways Nginx Reverse Proxy","total_count":1,"children":[]},{"name":"Step 7: Enable SSL Certificate","total_count":1,"children":[]},{"name":"TrustLens AI - Cloudways Deployment & Hosting Guide","total_count":1,"children":[]}]},{"name":"graphify.md","total_count":9,"children":[{"name":"1. Graphify Identity & Installation","total_count":1,"children":[]},{"name":"2. Graph Generation Command & Artifacts","total_count":1,"children":[]},{"name":"3. Top Architectural God Nodes (Core Central Abstractions)","total_count":1,"children":[]},{"name":"4. Agent Architectural Query & Result","total_count":1,"children":[]},{"name":"5. Visual Graph Screenshots & Verification","total_count":1,"children":[]},{"name":"Graph-Assisted Impact Analysis:","total_count":1,"children":[]},{"name":"graphify.md","total_count":1,"children":[]},{"name":"Mandatory Hackathon Query:","total_count":1,"children":[]},{"name":"TrustLens AI - Graphify Codebase Knowledge Graph Integration","total_count":1,"children":[]}]},{"name":"implementation-plan.md","total_count":17,"children":[{"name":"1. Executive Summary & Problem Statement","total_count":1,"children":[]},{"name":"2. Target Prizes & Verification Status","total_count":1,"children":[]},{"name":"3. Technology Stack & Licensing","total_count":1,"children":[]},{"name":"4. Phase-by-Phase Execution Roadmap","total_count":1,"children":[]},{"name":"implementation-plan.md","total_count":1,"children":[]},{"name":"Phase 0: Inspection, Feasibility, and Traceability (Current)","total_count":1,"children":[]},{"name":"Phase 10: Open-Source Readiness & Submission Package","total_count":1,"children":[]},{"name":"Phase 1: Smallest Real End-to-End Flow","total_count":1,"children":[]},{"name":"Phase 2: Input & Extraction Pipeline","total_count":1,"children":[]},{"name":"Phase 3: Gemma 4 Multimodal Analysis & Schema Validation","total_count":1,"children":[]},{"name":"Phase 4: Deterministic Rules Engine & Scoring Policy","total_count":1,"children":[]},{"name":"Phase 5: Security, Rate Limiting & Domain Checks","total_count":1,"children":[]},{"name":"Phase 6: Polished Web Interface & Export","total_count":1,"children":[]},{"name":"Phase 7: Comprehensive Testing & Synthetic Samples","total_count":1,"children":[]},{"name":"Phase 8: Graphify Codebase Graph","total_count":1,"children":[]},{"name":"Phase 9: Cloudways Deployment Guide & Architecture","total_count":1,"children":[]},{"name":"TrustLens AI - Implementation Plan & Roadmap","total_count":1,"children":[]}]},{"name":"integration-verification.md","total_count":11,"children":[{"name":"1. Gemma 4 Integration Verification (Google DeepMind)","total_count":1,"children":[]},{"name":"2. Cloudways Hosting Verification","total_count":1,"children":[]},{"name":"3. Graphify Codebase Knowledge Graph Verification","total_count":1,"children":[]},{"name":"4. Open-Source AI (DigitalOcean) Prize Verification","total_count":1,"children":[]},{"name":"5. Summary of Decision Classifications","total_count":1,"children":[]},{"name":"integration-verification.md","total_count":1,"children":[]},{"name":"Status: **VERIFIED (Architecture & Capabilities)**; **BLOCKED (Server SSH / API Access)**","total_count":1,"children":[]},{"name":"Status: **VERIFIED (Endpoint and Specifications)**; **PENDING CREDENTIALS (Live API Key)**","total_count":1,"children":[]},{"name":"Status: **VERIFIED (Tooling & CLI Interface)**","total_count":1,"children":[]},{"name":"Status: **VERIFIED**","total_count":1,"children":[]},{"name":"TrustLens AI - Integration Verification & Feasibility Analysis","total_count":1,"children":[]}]},{"name":"requirements-matrix.md","total_count":2,"children":[{"name":"requirements-matrix.md","total_count":1,"children":[]},{"name":"TrustLens AI - Requirements Traceability Matrix","total_count":1,"children":[]}]}]},{"name":"README.md","total_count":19,"children":[{"name":"1. Clone & Set Up Virtual Environment","total_count":1,"children":[]},{"name":"1. Problem Statement","total_count":1,"children":[]},{"name":"10. Security & Privacy Safeguards","total_count":1,"children":[]},{"name":"11. Limitations & Ethical Boundaries","total_count":1,"children":[]},{"name":"12. Open-Source License & Contributing","total_count":1,"children":[]},{"name":"2. Configure Environment Variables","total_count":1,"children":[]},{"name":"2. Core Architecture","total_count":1,"children":[]},{"name":"3. Key Features","total_count":1,"children":[]},{"name":"3. Run the Application","total_count":1,"children":[]},{"name":"4. Target Challenge & Prize Status Matrix","total_count":1,"children":[]},{"name":"5. Quick Start (Local Setup)","total_count":1,"children":[]},{"name":"6. Running with Docker Compose","total_count":1,"children":[]},{"name":"7. Running the Test Suite","total_count":1,"children":[]},{"name":"8. REST API Documentation","total_count":1,"children":[]},{"name":"9. Graphify Codebase Intelligence","total_count":1,"children":[]},{"name":"Prerequisites","total_count":1,"children":[]},{"name":"README.md","total_count":1,"children":[]},{"name":"Test Coverage Highlights:","total_count":1,"children":[]},{"name":"TrustLens AI \ud83d\udd0d\ud83d\udee1\ufe0f","total_count":1,"children":[]}]},{"name":"samples","total_count":5,"children":[{"name":"generate_samples.py","total_count":5,"children":[{"name":"generate_fake_internship_pdf()","total_count":1,"children":[]},{"name":"generate_legitimate_offer_pdf()","total_count":1,"children":[]},{"name":"generate_phishing_sms_image()","total_count":1,"children":[]},{"name":"generate_text_samples()","total_count":1,"children":[]},{"name":"Script to generate synthetic demo files for TrustLens AI: - Fake internship\u2026","total_count":1,"children":[]}]}]},{"name":"tests","total_count":52,"children":[{"name":"test_api.py","total_count":5,"children":[{"name":"Integration tests for FastAPI endpoints: /api/health, /api/samples,\u2026","total_count":1,"children":[]},{"name":"test_analyze_text_json_endpoint()","total_count":1,"children":[]},{"name":"test_export_markdown_endpoint()","total_count":1,"children":[]},{"name":"test_health_endpoint()","total_count":1,"children":[]},{"name":"test_samples_endpoint()","total_count":1,"children":[]}]},{"name":"test_evidence.py","total_count":4,"children":[{"name":"test_fabricated_quote_quarantined()","total_count":1,"children":[]},{"name":"test_image_provenance_honesty()","total_count":1,"children":[]},{"name":"test_quote_verified_in_text()","total_count":1,"children":[]},{"name":"Unit tests for evidence verification, provenance tagging, and quarantining.","total_count":1,"children":[]}]},{"name":"test_extractor.py","total_count":9,"children":[{"name":"create_minimal_pdf_bytes()","total_count":1,"children":[]},{"name":"create_minimal_png_bytes()","total_count":1,"children":[]},{"name":"test_corrupted_signature_rejection()","total_count":1,"children":[]},{"name":"test_empty_file_rejection()","total_count":1,"children":[]},{"name":"test_empty_text_rejection()","total_count":1,"children":[]},{"name":"test_image_extraction()","total_count":1,"children":[]},{"name":"test_pdf_extraction_digital()","total_count":1,"children":[]},{"name":"test_text_extraction()","total_count":1,"children":[]},{"name":"Unit tests for DocumentExtractor and file validation.","total_count":1,"children":[]}]},{"name":"test_hackathon_cases.py","total_count":11,"children":[{"name":"Hackathon Rubric Test Suite - TrustLens AI. Directly validates the 5 mandatory\u2026","total_count":1,"children":[]},{"name":"Scenario 1: Document containing several warning signs: - Upfront fee\u2026","total_count":1,"children":[]},{"name":"Scenario 2: An ordinary offer without obvious warning signs: - Verifiable\u2026","total_count":1,"children":[]},{"name":"Scenario 3: Document containing conflicting information: - First claims that\u2026","total_count":1,"children":[]},{"name":"Scenario 4: An incomplete or sparse document: - Sparse excerpt without\u2026","total_count":1,"children":[]},{"name":"Scenario 5: Invalid or unsupported files: - 0-byte empty file ->\u2026","total_count":1,"children":[]},{"name":"test_case_1_several_warning_signs()","total_count":1,"children":[]},{"name":"test_case_2_ordinary_offer_without_warning_signs()","total_count":1,"children":[]},{"name":"test_case_3_document_with_conflicting_information()","total_count":1,"children":[]},{"name":"test_case_4_incomplete_sparse_document()","total_count":1,"children":[]},{"name":"test_case_5_invalid_and_unsupported_files()","total_count":1,"children":[]}]},{"name":"test_prompt_injection.py","total_count":2,"children":[{"name":"Security and prompt injection resilience tests for TrustLens AI. Ensures\u2026","total_count":1,"children":[]},{"name":"test_adversarial_prompt_injection_does_not_suppress_rules()","total_count":1,"children":[]}]},{"name":"test_rules.py","total_count":10,"children":[{"name":"test_free_email_corporate_sender()","total_count":1,"children":[]},{"name":"test_free_email_non_corporate()","total_count":1,"children":[]},{"name":"test_full_rules_engine_multi_hit()","total_count":1,"children":[]},{"name":"test_lookalike_domain()","total_count":1,"children":[]},{"name":"test_messaging_app_move()","total_count":1,"children":[]},{"name":"test_payment_rule_negation_contexts()","total_count":1,"children":[]},{"name":"test_payment_rule_positive()","total_count":1,"children":[]},{"name":"test_unrealistic_offer()","total_count":1,"children":[]},{"name":"test_urgency_rule()","total_count":1,"children":[]},{"name":"Unit tests for deterministic rules engine and context-sensitive checks.","total_count":1,"children":[]}]},{"name":"test_schema_validation.py","total_count":5,"children":[{"name":"test_reject_confidence_out_of_bounds()","total_count":1,"children":[]},{"name":"test_reject_missing_required_fields()","total_count":1,"children":[]},{"name":"test_reject_unexpected_extra_fields()","total_count":1,"children":[]},{"name":"test_valid_schema()","total_count":1,"children":[]},{"name":"Unit tests for Pydantic schema validation of Gemma model outputs.","total_count":1,"children":[]}]},{"name":"test_scoring.py","total_count":6,"children":[{"name":"make_metadata()","total_count":1,"children":[]},{"name":"test_deduplication_between_ai_and_rules()","total_count":1,"children":[]},{"name":"test_high_risk_scam_scoring()","total_count":1,"children":[]},{"name":"test_low_risk_legitimate_scoring()","total_count":1,"children":[]},{"name":"test_sparse_input_insufficient_information()","total_count":1,"children":[]},{"name":"Unit tests for scoring engine, deduplication, and risk classification.","total_count":1,"children":[]}]}]}]};
+
+    function transformData(jsonData) {
+        // Helper function to recursively build the children structure
+        function processNode(node, parentL1StageName) {
+            let displayName = node.name;
+            // Append total_count if it exists and is not already in the name
+            if (node.total_count !== undefined) {
+                if (!/\(Total Count: \d+\)$/.test(displayName)) {
+                    displayName += ` (Total Count: ${node.total_count})`;
+                }
+            }
+
+            const newNode = { name: displayName };
+
+            if (parentL1StageName === "Root") {
+                 newNode.originalStageName = node.name;
+            } else {
+                newNode.originalStageName = parentL1StageName;
+            }
+
+            if (node.children && node.children.length > 0) {
+                const stageNameToPass = (parentL1StageName === "Root") ? node.name : parentL1StageName;
+                newNode.children = node.children.map(child => processNode(child, stageNameToPass));
+            }
+
+            return newNode;
+        }
+
+        let rootDisplayName = jsonData.name;
+        if (jsonData.total_count !== undefined && !/\(Total Count: \d+\)$/.test(rootDisplayName)) {
+            rootDisplayName += ` (Total Count: ${jsonData.total_count})`;
+        }
+
+        return {
+            name: rootDisplayName,
+            originalStageName: "Root",
+            children: (jsonData.children || []).map(child => processNode(child, "Root"))
+        };
+    }
+
+    const treeData = transformData(initialJsonData);
+
+    // Auto-populated phaseColors: every depth-1 child of the root gets
+    // a stable colour from a bigger palette so all top-level dirs are
+    // distinguishable.
+    const PALETTE = [
+      ["#3498DB","#2980B9","#AED6F1"], ["#2ECC71","#27AE60","#A9DFBF"],
+      ["#E74C3C","#C0392B","#F5B7B1"], ["#9B59B6","#8E44AD","#D7BDE2"],
+      ["#F39C12","#D68910","#FAD7A0"], ["#1ABC9C","#117864","#A2D9CE"],
+      ["#34495E","#1B2631","#ABB2B9"], ["#E67E22","#BA4A00","#F5CBA7"],
+      ["#16A085","#0E6655","#A2D9CE"], ["#D35400","#A04000","#EDBB99"],
+      ["#7F8C8D","#566573","#D5DBDB"], ["#C0392B","#7B241C","#F5B7B1"],
+      ["#2E86C1","#1B4F72","#A9CCE3"], ["#28B463","#196F3D","#A9DFBF"],
+      ["#AF7AC5","#6C3483","#D2B4DE"],
+    ];
+    const phaseColors = { "Root": { fill: "#4A4A4A", stroke: "#333333", collapsedFill: "#6C757D" },
+                          "Default": { fill: "#BDC3C7", stroke: "#95A5A6", collapsedFill: "#ECF0F1" } };
+    (initialJsonData.children || []).forEach((c, i) => {
+      const pal = PALETTE[i % PALETTE.length];
+      phaseColors[c.name] = { fill: pal[0], stroke: pal[1], collapsedFill: pal[2] };
+    });
+
+    const levelSpecificPalettes = {
+      0: { fill: "#4A4A4A", stroke: "#333333", collapsedFill: "#6C757D" },
+      2: { fill: "#6ab04c", stroke: "#508a38", collapsedFill: "#a3d391" },
+      3: { fill: "#f0932b", stroke: "#d0730f", collapsedFill: "#f6c07e" },
+      4: { fill: "#be2edd", stroke: "#a01cb3", collapsedFill: "#e08bf2" },
+      5: { fill: "#00a8ff", stroke: "#007ac1", collapsedFill: "#74d2ff" },
+      6: { fill: "#e55039", stroke: "#c23620", collapsedFill: "#f09a8d" },
+      default: { fill: "#747d8c", stroke: "#57606f", collapsedFill: "#a4b0be" }
+    };
+
+    const svgElement = d3.select("#tree-svg");
+    const initialSvgWidth = +svgElement.attr("width");
+    const initialSvgHeight = +svgElement.attr("height");
+    const margin = { top: 40, right: 120, bottom: 80, left: 450 };
+    let width = initialSvgWidth - margin.left - margin.right;
+    let height = initialSvgHeight - margin.top - margin.bottom;
+    const duration = 500;
+    let nodeCounter = 0;
+    const g = svgElement.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+    const treemap = d3.tree().nodeSize([40, 0]);
+    let rootNode = d3.hierarchy(treeData, d => d.children);
+    rootNode.x0 = 0;
+    rootNode.y0 = 0;
+
+    if (rootNode.children) {
+      rootNode.children.forEach(d_child => {
+        if (d_child.children) { collapseBranch(d_child); }
+      });
+    }
+    updateTree(rootNode);
+
+    function collapseBranch(d) { if (d.children) { d._children = d.children; d._children.forEach(collapseBranch); d.children = null; } }
+    function expandBranch(d) { if (d._children) { d.children = d._children; d._children = null; } if (d.children) { d.children.forEach(expandBranch); } }
+    window.expandAll = () => { expandBranch(rootNode); updateTree(rootNode); };
+    window.collapseAll = () => { if (rootNode.children) { rootNode.children.forEach(collapseBranch); } updateTree(rootNode); };
+    window.resetView = () => { if (rootNode.children) { rootNode.children.forEach(d_child => { if (d_child.children || d_child._children) { collapseBranch(d_child); } }); } if (rootNode._children && !rootNode.children) { rootNode.children = rootNode._children; rootNode._children = null; } updateTree(rootNode); };
+
+    function updateTree(source) {
+      const treeLayoutData = treemap(rootNode);
+      let nodes = treeLayoutData.descendants();
+      let links = treeLayoutData.descendants().slice(1);
+
+      let minX = 0;
+      let maxX = 0;
+      if (nodes.length > 0) {
+        minX = d3.min(nodes, d => d.x);
+        maxX = d3.max(nodes, d => d.x);
+      }
+
+      let neededHeight = Math.max(initialSvgHeight, maxX - minX + margin.top + margin.bottom + 100);
+      svgElement.transition().duration(duration / 2).attr("height", neededHeight);
+      g.transition().duration(duration / 2).attr("transform", `translate(${margin.left},${margin.top - minX + 40})`);
+
+      nodes.forEach(d => { d.y = d.depth * 400; }); // Adjust horizontal separation if needed
+
+      const node = g.selectAll('g.node').data(nodes, d => d.id || (d.id = ++nodeCounter));
+      const nodeEnter = node.enter().append('g')
+        .attr('class', d => "node" + (d.children || d._children ? " node--internal" : " node--leaf") + (d._children ? " _children" : ""))
+        .attr('transform', d => `translate(${source.y0},${source.x0})`)
+        .on('click', (event, d) => { if (d.children) { d._children = d.children; d.children = null; } else if (d._children) { d.children = d._children; d._children = null; } updateTree(d); })
+        .style('cursor', d => (d.children || d._children) ? 'pointer' : 'default');
+
+      nodeEnter.append('circle').attr('r', 1e-6);
+
+      nodeEnter.append('text')
+        .attr('dy', '.35em')
+        .attr('x', d => d.children || d._children ? -14 : 14)
+        .attr('text-anchor', d => d.children || d._children ? 'end' : 'start')
+        .style("fill-opacity", 1e-6)
+        .call(wrapText, 380);
+
+      const nodeUpdate = nodeEnter.merge(node);
+      nodeUpdate.transition().duration(duration)
+        .attr('transform', d => `translate(${d.y},${d.x})`)
+        .attr('class', d => "node" + (d.children ? " node--internal" : " node--leaf") + (d._children ? " node--internal _children" : ""));
+
+      nodeUpdate.select('circle').attr('r', 8.5)
+        .style('fill', d => {
+            let palette;
+            if (d.depth === 0) {
+                palette = levelSpecificPalettes[0];
+            } else if (d.depth === 1) {
+                palette = phaseColors[d.data.originalStageName] || phaseColors.Default;
+            } else {
+                palette = levelSpecificPalettes[d.depth] || levelSpecificPalettes.default;
+            }
+            if (d._children) return palette.collapsedFill;
+            if (d.children) return palette.fill;
+            return "#fff";
+        })
+        .style('stroke', d => {
+            let palette;
+            if (d.depth === 0) {
+                palette = levelSpecificPalettes[0];
+            } else if (d.depth === 1) {
+                palette = phaseColors[d.data.originalStageName] || phaseColors.Default;
+            } else {
+                palette = levelSpecificPalettes[d.depth] || levelSpecificPalettes.default;
+            }
+            return palette.stroke;
+        });
+      nodeUpdate.select('text').style("fill-opacity", 1).call(wrapText, 380);
+
+      const nodeExit = node.exit().transition().duration(duration).attr('transform', d => `translate(${source.y},${source.x})`).remove();
+      nodeExit.select('circle').attr('r', 1e-6);
+      nodeExit.select('text').style('fill-opacity', 1e-6);
+
+      const link = g.selectAll('path.link').data(links, d => d.id);
+      const linkEnter = link.enter().insert('path', "g").attr('class', 'link').attr('d', d => { const o = { x: source.x0, y: source.y0 }; return diagonal(o, o); });
+
+      linkEnter.merge(link).transition().duration(duration).attr('d', d => diagonal(d, d.parent))
+        .style('stroke', d => {
+            const sourceNode = d.parent;
+            if (!sourceNode) return phaseColors.Default.stroke;
+            const l1AncestorName = sourceNode.data.originalStageName;
+            const colorPalette = phaseColors[l1AncestorName] || phaseColors.Default;
+            return colorPalette.stroke;
+        });
+      link.exit().transition().duration(duration).attr('d', d => { const o = { x: source.x, y: source.y }; return diagonal(o, o); }).remove();
+      nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
+    }
+
+    function diagonal(s, d) { return `M ${s.y} ${s.x} C ${(s.y + d.y) / 2} ${s.x}, ${(s.y + d.y) / 2} ${d.x}, ${d.y} ${d.x}`; }
+
+    function wrapText(textElements, maxWidth) {
+        const textPartColors = {
+            name: '#343a40',
+            count: '#0056b3'
+        };
+        const countRegex = /(\s\(Total Count: \d+\))$/;
+
+        textElements.each(function () {
+            const textD3 = d3.select(this);
+            const originalNodeText = textD3.datum().data.name;
+            const x = parseFloat(textD3.attr("x") || 0);
+            const initialDy = textD3.attr("dy");
+            const textAnchor = textD3.attr("text-anchor");
+            const lineHeight = 1.1;
+
+            textD3.text(null);
+
+            let namePart = originalNodeText;
+            let countPartText = "";
+
+            const countMatch = originalNodeText.match(countRegex);
+            if (countMatch && originalNodeText.endsWith(countMatch[0])) {
+                namePart = originalNodeText.substring(0, originalNodeText.length - countMatch[0].length).trim();
+                countPartText = countMatch[0].trim();
+            }
+
+            const tokens = [];
+            namePart.split(/\s+/).filter(Boolean).forEach(word => {
+                tokens.push({ text: word, type: 'name' });
+            });
+            if (countPartText) {
+                tokens.push({ text: countPartText, type: 'count' });
+            }
+
+            if (tokens.length === 0 && originalNodeText) {
+                tokens.push({ text: originalNodeText, type: 'name' });
+            }
+
+            let currentTspan = textD3.append("tspan").attr("x", x).attr("dy", initialDy);
+            if (textAnchor === "end") currentTspan.attr("text-anchor", "end");
+
+            let lineTokens = [];
+
+            for (let i = 0; i < tokens.length; i++) {
+                const tokenObj = tokens[i];
+
+                lineTokens.push(tokenObj);
+                currentTspan.text(lineTokens.map(t => t.text).join(" "));
+
+                if (currentTspan.node().getComputedTextLength() > maxWidth && lineTokens.length > 1) {
+                    lineTokens.pop();
+
+                    currentTspan.text(null);
+                    lineTokens.forEach((prevToken, idx) => {
+                        currentTspan.append("tspan")
+                            .text((idx > 0 ? " " : "") + prevToken.text)
+                            .style("fill", textPartColors[prevToken.type] || textPartColors.name)
+                            .style("font-weight", prevToken.type === 'count' ? "bold" : "normal");
+                    });
+
+                    lineTokens = [tokenObj];
+                    currentTspan = textD3.append("tspan").attr("x", x).attr("dy", lineHeight + "em");
+                    if (textAnchor === "end") currentTspan.attr("text-anchor", "end");
+                }
+            }
+
+            currentTspan.text(null);
+            lineTokens.forEach((token, idx) => {
+                currentTspan.append("tspan")
+                    .text((idx > 0 ? " " : "") + token.text)
+                    .style("fill", textPartColors[token.type] || textPartColors.name)
+                    .style("font-weight", token.type === 'count' ? "bold" : "normal");
+            });
+
+            if (textD3.selectAll("tspan > tspan").empty() && textD3.select("tspan").text().length === 0 && originalNodeText) {
+                let t = textD3.select("tspan");
+                let displayText = originalNodeText;
+                t.text(displayText).style("fill", textPartColors.name);
+                if (t.node() && t.node().getComputedTextLength() > maxWidth && displayText.length > 20) {
+                    let estimatedChars = Math.floor(maxWidth / (t.node().getComputedTextLength()/displayText.length) );
+                    displayText = displayText.substring(0, Math.max(0, estimatedChars - 3)) + "...";
+                    t.text(displayText);
+                }
+            }
+        });
+    }
+  </script>
+</body>
+</html>

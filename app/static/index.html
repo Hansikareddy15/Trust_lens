@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrustLens AI — Document Verification & Scam Decision Support</title>
+  <meta name="description" content="AI-powered explainable document verification and fraud prevention platform built with Gemma 4, deterministic rules, and evidence-first analysis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <!-- Legal Disclaimer Banner -->
+  <aside id="disclaimer-banner" class="disclaimer-banner" role="complementary" aria-label="Legal Notice">
+    <div class="banner-content">
+      <span class="banner-icon">⚖️</span>
+      <span class="banner-text"><strong>Preliminary assessment, not proof of fraud.</strong> TrustLens AI provides evidence-backed decision support, not legal advice or fraud verdicts. Never assert fraud against any entity based solely on automated signals.</span>
+    </div>
+  </aside>
+
+  <!-- Navigation Header -->
+  <header class="app-header" role="banner">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <circle cx="12" cy="12" r="3"/>
+            <line x1="12" y1="3" x2="12" y2="6"/>
+            <line x1="12" y1="18" x2="12" y2="21"/>
+            <line x1="3" y1="12" x2="6" y2="12"/>
+            <line x1="18" y1="12" x2="21" y2="12"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>TrustLens AI</h1>
+          <span class="brand-tagline">Evidence-First Document Verification</span>
+        </div>
+      </div>
+
+      <div class="header-badges">
+        <div id="service-health-pill" class="pill pill-health">
+          <span class="pulse-dot"></span>
+          <span id="health-status-text">Connecting...</span>
+        </div>
+        <div class="pill pill-model">
+          <span class="model-icon">⚡</span>
+          <span id="active-model-text">Gemma 4 (gemma-4-31b-it)</span>
+        </div>
+        <a href="/docs" target="_blank" rel="noopener" class="btn btn-sm btn-ghost" id="api-docs-link">API Docs</a>
+        <a href="/graph" target="_blank" rel="noopener" class="btn btn-sm btn-ghost" id="graph-link">Code Graph</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="main-container" role="main">
+    <!-- Hero / Problem Intro -->
+    <section class="hero-section">
+      <h2 class="hero-title">Analyze Suspicious Offers, Phishing Messages & Official Documents</h2>
+      <p class="hero-subtitle">
+        Upload internship letters, job advertisements, or message screenshots. 
+        TrustLens AI combines <strong>Gemma 4 multimodal analysis</strong> with a <strong>deterministic rules engine</strong> 
+        to verify evidence quotes, explain warning signals, and guide your next verification steps.
+      </p>
+    </section>
+
+    <!-- Synthetic Demo Samples Bar -->
+    <section class="samples-section" aria-label="Quick Demo Samples">
+      <div class="samples-header">
+        <span class="samples-title">Quick Demo Samples (Synthetic Hackathon Test Cases):</span>
+        <span class="samples-hint">Click any sample to load:</span>
+      </div>
+      <div class="samples-grid" id="sample-buttons-container">
+        <button type="button" class="sample-btn" id="sample-btn-fee" data-sample-id="sample_fake_internship_fee">
+          <span class="sample-badge badge-high">High Risk</span>
+          <span class="sample-label">Fake Internship Fee</span>
+        </button>
+        <button type="button" class="sample-btn" id="sample-btn-sms" data-sample-id="sample_phishing_sms">
+          <span class="sample-badge badge-high">Phishing</span>
+          <span class="sample-label">Banking SMS Urgent Alert</span>
+        </button>
+        <button type="button" class="sample-btn" id="sample-btn-lookalike" data-sample-id="sample_lookalike_email">
+          <span class="sample-badge badge-high">Lookalike</span>
+          <span class="sample-label">Google Lookalike Domain</span>
+        </button>
+        <button type="button" class="sample-btn" id="sample-btn-legit" data-sample-id="sample_legitimate_offer">
+          <span class="sample-badge badge-low">Legitimate</span>
+          <span class="sample-label">Standard Offer Letter</span>
+        </button>
+        <button type="button" class="sample-btn" id="sample-btn-injection" data-sample-id="sample_prompt_injection">
+          <span class="sample-badge badge-security">Adversarial</span>
+          <span class="sample-label">Prompt Injection Test</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Input Card -->
+    <section class="card input-card" id="input-card">
+      <div class="tabs-header" role="tablist">
+        <button type="button" class="tab-btn active" id="tab-file" role="tab" aria-selected="true" aria-controls="panel-file">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Upload Document or Image
+        </button>
+        <button type="button" class="tab-btn" id="tab-text" role="tab" aria-selected="false" aria-controls="panel-text">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Paste Text Content
+        </button>
+      </div>
+
+      <form id="analyze-form" class="analyze-form">
+        <!-- File Upload Panel -->
+        <div id="panel-file" class="tab-panel active" role="tabpanel" aria-labelledby="tab-file">
+          <div class="drop-zone" id="drop-zone">
+            <input type="file" id="file-input" name="file" accept=".pdf,.png,.jpg,.jpeg,.webp,.txt" class="file-input-hidden">
+            <div class="drop-zone-content">
+              <div class="drop-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/>
+                  <path d="M12 12v9"/>
+                  <path d="m16 16-4-4-4 4"/>
+                </svg>
+              </div>
+              <p class="drop-title">Drag & drop your file here, or <span class="browse-link">browse</span></p>
+              <p class="drop-meta">Supports Digital & Scanned PDF, PNG, JPG, WEBP (Max 10 MB, 10 pages)</p>
+              <div id="selected-file-badge" class="selected-file-badge hidden">
+                <span id="selected-file-name">filename.pdf</span>
+                <button type="button" id="clear-file-btn" class="clear-file-btn" aria-label="Remove file">✕</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text Paste Panel -->
+        <div id="panel-text" class="tab-panel hidden" role="tabpanel" aria-labelledby="tab-text">
+          <div class="textarea-wrapper">
+            <textarea id="text-input" name="text" placeholder="Paste the complete text of the offer letter, email, SMS, or job advertisement here..." rows="8"></textarea>
+            <div class="textarea-meta">
+              <span id="char-count">0 characters</span>
+              <button type="button" id="clear-text-btn" class="btn btn-xs btn-ghost">Clear</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Privacy & Security Notice -->
+        <div class="privacy-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span><strong>Privacy Notice:</strong> Uploads are processed in-memory or transient cache and deleted immediately after analysis. Content is transmitted securely to the configured server-side Gemma 4 provider. Never upload confidential credentials or real victim personal records.</span>
+        </div>
+
+        <!-- Action Button -->
+        <div class="form-actions">
+          <button type="submit" id="analyze-btn" class="btn btn-primary btn-lg">
+            <span class="btn-spinner hidden" id="analyze-spinner"></span>
+            <span id="analyze-btn-text">Run TrustLens Verification</span>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Processing State View -->
+    <section class="card processing-card hidden" id="processing-card" aria-live="polite">
+      <div class="processing-content">
+        <div class="spinner-large"></div>
+        <h3 id="processing-status-title">Executing Verification Pipeline...</h3>
+        <p id="processing-status-desc">Validating file signatures, extracting content, and contacting Gemma 4.</p>
+        <div class="progress-steps">
+          <div class="step active" id="step-extract"><span class="step-num">1</span> Extract</div>
+          <div class="step" id="step-ai"><span class="step-num">2</span> Gemma 4 Analysis</div>
+          <div class="step" id="step-evidence"><span class="step-num">3</span> Evidence Check</div>
+          <div class="step" id="step-rules"><span class="step-num">4</span> Rules Engine</div>
+          <div class="step" id="step-score"><span class="step-num">5</span> Scoring & Report</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Error Banner -->
+    <section class="card error-card hidden" id="error-card" role="alert">
+      <div class="error-icon">⚠️</div>
+      <div class="error-content">
+        <h3 id="error-title">Analysis Failed</h3>
+        <p id="error-message">An unexpected error occurred.</p>
+        <button type="button" id="dismiss-error-btn" class="btn btn-sm btn-outline">Dismiss</button>
+      </div>
+    </section>
+
+    <!-- Results Dashboard View -->
+    <section class="results-dashboard hidden" id="results-dashboard" aria-live="polite">
+      <!-- Results Overview Header -->
+      <div class="card overview-card">
+        <div class="overview-grid">
+          <!-- Score Gauge / Level -->
+          <div class="score-summary">
+            <div class="score-meter-box">
+              <div class="score-circle" id="score-circle">
+                <span class="score-number" id="score-number">--</span>
+                <span class="score-scale">/ 100</span>
+              </div>
+            </div>
+            <div class="score-classification">
+              <span class="score-label">Preliminary Risk Level</span>
+              <div class="risk-badge-large" id="risk-badge">Low Risk</div>
+              <span class="sufficiency-tag" id="sufficiency-tag">Sufficiency: Sufficient</span>
+            </div>
+          </div>
+
+          <!-- Document & Model Metadata -->
+          <div class="document-summary-box">
+            <div class="meta-row">
+              <span class="meta-label">Analyzed Document:</span>
+              <span class="meta-val" id="meta-filename">sample.pdf</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Type & Provenance:</span>
+              <span class="meta-val" id="meta-type">internship_offer (text-match-verified)</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Active Model:</span>
+              <span class="meta-val" id="meta-model">gemma-4-31b-it</span>
+            </div>
+            <p class="summary-paragraph" id="meta-summary">Factual document summary.</p>
+          </div>
+        </div>
+
+        <!-- Export Buttons -->
+        <div class="export-actions">
+          <button type="button" id="export-md-btn" class="btn btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export Markdown Report (.md)
+          </button>
+          <button type="button" id="print-report-btn" class="btn btn-ghost">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print / Save PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Transparent Scoring Signal Breakdown -->
+      <div class="card scoring-breakdown-card">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+          Transparent Risk Score Breakdown
+        </h3>
+        <p class="section-desc" id="scoring-explanation-text">How the heuristic score was computed:</p>
+        <div class="table-responsive">
+          <table class="signals-table" id="signals-table">
+            <thead>
+              <tr>
+                <th>Signal</th>
+                <th>Category</th>
+                <th>Points</th>
+                <th>Source</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="signals-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Verified Findings Backed by Evidence Quotes -->
+      <div class="card findings-card">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Verified Findings Backed by Source Evidence
+        </h3>
+        <p class="section-desc">Every finding quotes authentic source text. Quoted text is verified programmatically against the document.</p>
+        <div class="findings-container" id="findings-container">
+          <!-- Dynamically populated cards -->
+        </div>
+      </div>
+
+      <!-- Quarantined / Unsupported Findings Alert -->
+      <div class="card quarantined-card hidden" id="quarantined-card">
+        <div class="quarantine-header">
+          <span class="warning-symbol">⚠️</span>
+          <h4>Quarantined / Unsupported Findings (Excluded from Scoring)</h4>
+        </div>
+        <p class="section-desc">The following model claims were discarded from the risk score because their evidence quotes could not be located in the extracted source text:</p>
+        <div class="quarantined-list" id="quarantined-list">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Deterministic Rule Hits -->
+      <div class="card rules-card">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Independent Deterministic Rule Hits
+        </h3>
+        <p class="section-desc">Pre-programmed heuristic checks executed directly on extracted content independently of the AI model:</p>
+        <div class="rules-container" id="rules-container">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Balanced Perspective: Positive Signals & Unverified Claims -->
+      <div class="balance-grid">
+        <div class="card balance-card positive-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Positive Signals Observed
+          </h4>
+          <p class="section-desc">Signs consistent with legitimate organizations:</p>
+          <ul class="balance-list" id="positive-signals-list">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
+
+        <div class="card balance-card unverified-card">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Unverified Claims
+          </h4>
+          <p class="section-desc">Statements that cannot be proven from document alone:</p>
+          <ul class="balance-list" id="unverified-claims-list">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Recommended Actionable Verification Next Steps -->
+      <div class="card next-steps-card">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          Recommended Actionable Verification Steps
+        </h3>
+        <p class="section-desc">Never rely solely on an automated check. Complete these independent verification actions before taking any financial or personal step:</p>
+        <ol class="steps-list" id="recommended-steps-list">
+          <!-- Dynamically populated -->
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-left">
+        <p><strong>TrustLens AI</strong> — Hacktoberfest Hack Day Project</p>
+        <p class="footer-tech">Engineered with Python FastAPI, Gemma 4, PyMuPDF & Graphify.</p>
+      </div>
+      <div class="footer-right">
+        <a href="https://github.com" target="_blank" rel="noopener" class="footer-link">Open Source Repository</a>
+        <a href="/docs" target="_blank" rel="noopener" class="footer-link">API Specification</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

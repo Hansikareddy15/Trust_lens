@@ -1,0 +1,272 @@
+{
+  "app/__init__.py": {
+    "mtime": 1793428557.3531024,
+    "seen": 1793429391.9674861,
+    "ast_hash": "32de2e06658fe0339a7e3697130edd2f",
+    "semantic_hash": "32de2e06658fe0339a7e3697130edd2f"
+  },
+  "app/api/__init__.py": {
+    "mtime": 1793428550.5046039,
+    "seen": 1793429391.9674966,
+    "ast_hash": "3fdf4dc10ff6b52c9e2a701496122748",
+    "semantic_hash": "3fdf4dc10ff6b52c9e2a701496122748"
+  },
+  "app/api/routes.py": {
+    "mtime": 1793428543.5830855,
+    "seen": 1793429391.9675028,
+    "ast_hash": "c4b4bf3f2ba37672470dae976501d5f3",
+    "semantic_hash": "c4b4bf3f2ba37672470dae976501d5f3"
+  },
+  "app/core/__init__.py": {
+    "mtime": 1793428564.0191078,
+    "seen": 1793429391.9675062,
+    "ast_hash": "302adff9b3083fc0061f075c1fd3e02b",
+    "semantic_hash": "302adff9b3083fc0061f075c1fd3e02b"
+  },
+  "app/core/analyzer.py": {
+    "mtime": 1793428520.0235891,
+    "seen": 1793429391.967509,
+    "ast_hash": "cdff7a4ba7cf6caba9b7cfbca8d293c6",
+    "semantic_hash": "cdff7a4ba7cf6caba9b7cfbca8d293c6"
+  },
+  "app/core/config.py": {
+    "mtime": 1793432150.6694946,
+    "seen": 1793432309.0299497,
+    "ast_hash": "ba7025fec211d241af49d6c43116f8a2",
+    "semantic_hash": ""
+  },
+  "app/core/domain_checks.py": {
+    "mtime": 1793428500.599823,
+    "seen": 1793429391.9675136,
+    "ast_hash": "9ea3861e8df8e06c8c940613d5c2c786",
+    "semantic_hash": "9ea3861e8df8e06c8c940613d5c2c786"
+  },
+  "app/core/evidence.py": {
+    "mtime": 1793428409.021967,
+    "seen": 1793429391.9675157,
+    "ast_hash": "1d3444477a712e1931a06b135101888b",
+    "semantic_hash": "1d3444477a712e1931a06b135101888b"
+  },
+  "app/core/extractor.py": {
+    "mtime": 1793428390.9319453,
+    "seen": 1793429391.9675179,
+    "ast_hash": "53180805fa8a8e761d9bdcc43c86e44d",
+    "semantic_hash": "53180805fa8a8e761d9bdcc43c86e44d"
+  },
+  "app/core/gemma_client.py": {
+    "mtime": 1793428368.0935216,
+    "seen": 1793429391.9675198,
+    "ast_hash": "538c6163bff490bccbb7e73fb246e621",
+    "semantic_hash": "538c6163bff490bccbb7e73fb246e621"
+  },
+  "app/core/report.py": {
+    "mtime": 1793428486.9378047,
+    "seen": 1793429391.967522,
+    "ast_hash": "cc9035dc1e942e14a066b73f529d6b90",
+    "semantic_hash": "cc9035dc1e942e14a066b73f529d6b90"
+  },
+  "app/core/rules.py": {
+    "mtime": 1793432223.592518,
+    "seen": 1793432309.0299766,
+    "ast_hash": "1565cdfde76e77d3080c6392ab628391",
+    "semantic_hash": ""
+  },
+  "app/core/schemas.py": {
+    "mtime": 1793428341.1749823,
+    "seen": 1793429391.9675264,
+    "ast_hash": "d1e6395bb6ddcd18ce900f86660f1291",
+    "semantic_hash": "d1e6395bb6ddcd18ce900f86660f1291"
+  },
+  "app/core/scoring.py": {
+    "mtime": 1793428468.1838748,
+    "seen": 1793429391.9675288,
+    "ast_hash": "64fdfc6d1fd344a110c3b1bd7e63e28c",
+    "semantic_hash": "64fdfc6d1fd344a110c3b1bd7e63e28c"
+  },
+  "app/main.py": {
+    "mtime": 1793428576.9518611,
+    "seen": 1793429391.967531,
+    "ast_hash": "6b03288c89dbc7d48ac3b52357919079",
+    "semantic_hash": "6b03288c89dbc7d48ac3b52357919079"
+  },
+  "app/static/app.js": {
+    "mtime": 1793429080.7624185,
+    "seen": 1793429391.9675333,
+    "ast_hash": "f8f7e906a592575b003ec8183622e98b",
+    "semantic_hash": "f8f7e906a592575b003ec8183622e98b"
+  },
+  "samples/generate_samples.py": {
+    "mtime": 1793428832.8471868,
+    "seen": 1793429391.9675353,
+    "ast_hash": "9b389970e269bac673ad44f509034c9a",
+    "semantic_hash": "9b389970e269bac673ad44f509034c9a"
+  },
+  "tests/test_api.py": {
+    "mtime": 1793428675.624987,
+    "seen": 1793429391.9675372,
+    "ast_hash": "5a265ccd43fa593cd79d353bada68ccc",
+    "semantic_hash": "5a265ccd43fa593cd79d353bada68ccc"
+  },
+  "tests/test_evidence.py": {
+    "mtime": 1793428650.7977445,
+    "seen": 1793429391.9675393,
+    "ast_hash": "90463ce2ebb3931e90f70cb72f07ce4c",
+    "semantic_hash": "90463ce2ebb3931e90f70cb72f07ce4c"
+  },
+  "tests/test_extractor.py": {
+    "mtime": 1793428595.041994,
+    "seen": 1793429391.9675415,
+    "ast_hash": "44dc73175f384a6285f438dc04240e93",
+    "semantic_hash": "44dc73175f384a6285f438dc04240e93"
+  },
+  "tests/test_prompt_injection.py": {
+    "mtime": 1793428663.1565883,
+    "seen": 1793429391.9675434,
+    "ast_hash": "e08d5e52d92aae67c145d4493f4c204c",
+    "semantic_hash": "e08d5e52d92aae67c145d4493f4c204c"
+  },
+  "tests/test_rules.py": {
+    "mtime": 1793428609.1876917,
+    "seen": 1793429391.9675455,
+    "ast_hash": "34514513b339a8c7008e8fc49ae628b1",
+    "semantic_hash": "34514513b339a8c7008e8fc49ae628b1"
+  },
+  "tests/test_schema_validation.py": {
+    "mtime": 1793428638.5064235,
+    "seen": 1793429391.9675484,
+    "ast_hash": "0a66615fb9e0b4a23aade89e7ad4314d",
+    "semantic_hash": "0a66615fb9e0b4a23aade89e7ad4314d"
+  },
+  "tests/test_scoring.py": {
+    "mtime": 1793428627.5467708,
+    "seen": 1793429391.9675505,
+    "ast_hash": "14b8e5cb518b9fc52eec91bd12ca18e4",
+    "semantic_hash": "14b8e5cb518b9fc52eec91bd12ca18e4"
+  },
+  "docker-compose.yml": {
+    "mtime": 1793429518.5837321,
+    "seen": 1793432309.029997,
+    "ast_hash": "4fde8fdd4b544f33eca1852f2169aa1c",
+    "semantic_hash": ""
+  },
+  "tests/test_hackathon_cases.py": {
+    "mtime": 1793432244.8761282,
+    "seen": 1793432309.0300176,
+    "ast_hash": "3e3e1b1ec7bc40e1738ca6905c9fd819",
+    "semantic_hash": ""
+  },
+  "CONTRIBUTING.md": {
+    "mtime": 1793429549.5749075,
+    "seen": 1793432309.0300374,
+    "ast_hash": "0d9027795d488c2c749ea57066f7c451",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1793429600.1782544,
+    "seen": 1793432309.0300415,
+    "ast_hash": "4d3bc8d4f30063c72eb5cf2da83e54e0",
+    "semantic_hash": ""
+  },
+  "app/static/index.html": {
+    "mtime": 1793428979.190158,
+    "seen": 1793432309.0300446,
+    "ast_hash": "1e0f576c1209979630d07a2b9c11a85c",
+    "semantic_hash": ""
+  },
+  "docs/build-status.md": {
+    "mtime": 1793429619.7619092,
+    "seen": 1793432309.030048,
+    "ast_hash": "5a714f89d43e69099977637f605069d0",
+    "semantic_hash": ""
+  },
+  "docs/demo-script.md": {
+    "mtime": 1793429566.671127,
+    "seen": 1793432309.0300508,
+    "ast_hash": "629dab4d2f175e313d1d00b4c15e6dac",
+    "semantic_hash": ""
+  },
+  "docs/deployment.md": {
+    "mtime": 1793429500.3499212,
+    "seen": 1793432309.0300539,
+    "ast_hash": "e1f46b49837acb6ca14b3174600396b3",
+    "semantic_hash": ""
+  },
+  "docs/graphify.md": {
+    "mtime": 1793429478.3001697,
+    "seen": 1793432309.0300565,
+    "ast_hash": "796f8a0905d1890d6c4c6f5177c209bb",
+    "semantic_hash": ""
+  },
+  "docs/implementation-plan.md": {
+    "mtime": 1793428189.0199404,
+    "seen": 1793432309.030059,
+    "ast_hash": "a863b6d2e0c7b6a77adf574eb04e94b9",
+    "semantic_hash": ""
+  },
+  "docs/integration-verification.md": {
+    "mtime": 1793428248.5431843,
+    "seen": 1793432309.0300624,
+    "ast_hash": "223c1e1e1276cb6ce66bef4a81d6c8a0",
+    "semantic_hash": ""
+  },
+  "docs/requirements-matrix.md": {
+    "mtime": 1793429640.57216,
+    "seen": 1793432309.0300653,
+    "ast_hash": "6e113bc477ddf68ca32ea15baa3fa7bf",
+    "semantic_hash": ""
+  },
+  "requirements.txt": {
+    "mtime": 1793429509.365308,
+    "seen": 1793432309.0300682,
+    "ast_hash": "cdef6ea7c4a81a44e8d7cf11345285b6",
+    "semantic_hash": ""
+  },
+  "samples/fake_internship_fee.txt": {
+    "mtime": 1793428848.1387036,
+    "seen": 1793432309.030071,
+    "ast_hash": "299f11b129e6d2de9985dd6e493551c0",
+    "semantic_hash": ""
+  },
+  "samples/legitimate_offer.txt": {
+    "mtime": 1793428848.1407125,
+    "seen": 1793432309.0300736,
+    "ast_hash": "4852eaebd0d2130d535a7c02089c5ddb",
+    "semantic_hash": ""
+  },
+  "samples/lookalike_domain_email.txt": {
+    "mtime": 1793428848.1387036,
+    "seen": 1793432309.0300767,
+    "ast_hash": "965d5da75dd14dbffe11aa29baf75a30",
+    "semantic_hash": ""
+  },
+  "samples/prompt_injection_doc.txt": {
+    "mtime": 1793428848.1407125,
+    "seen": 1793432309.0300796,
+    "ast_hash": "f76c2a8fb16ff83cbabdd36c31cfaf92",
+    "semantic_hash": ""
+  },
+  "TrustLens_AI_Project_Description.pdf": {
+    "mtime": 1793427617.2268274,
+    "seen": 1793432309.030082,
+    "ast_hash": "0a76b3b603c7b99cbae0d796b47175c2",
+    "semantic_hash": ""
+  },
+  "samples/fake_internship_fee.pdf": {
+    "mtime": 1793428848.0890143,
+    "seen": 1793432309.0300853,
+    "ast_hash": "3250c7d4ece72d3eb0adc587ccd4f4dc",
+    "semantic_hash": ""
+  },
+  "samples/legitimate_offer.pdf": {
+    "mtime": 1793428848.1027362,
+    "seen": 1793432309.0300894,
+    "ast_hash": "86327e8f370c3da35b443a4883a4626d",
+    "semantic_hash": ""
+  },
+  "samples/phishing_sms.png": {
+    "mtime": 1793428848.136696,
+    "seen": 1793432309.0300927,
+    "ast_hash": "860649647593f4159385f4cb21477471",
+    "semantic_hash": ""
+  }
+}

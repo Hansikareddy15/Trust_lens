@@ -1,0 +1,425 @@
+{
+  "communities": {
+    "0": [
+      "app_core_extractor",
+      "app_core_extractor_corruptedfileerror",
+      "app_core_extractor_documentextractor",
+      "app_core_extractor_documentextractor_extract_from_image",
+      "app_core_extractor_documentextractor_extract_from_pdf",
+      "app_core_extractor_documentextractor_extract_from_text",
+      "app_core_extractor_documentextractor_validate_file_bytes",
+      "app_core_extractor_extractionerror",
+      "app_core_extractor_fileoversizederror",
+      "app_core_extractor_py_exception",
+      "app_core_extractor_rationale_1",
+      "app_core_extractor_rationale_106",
+      "app_core_extractor_rationale_17",
+      "app_core_extractor_rationale_176",
+      "app_core_extractor_rationale_43",
+      "app_core_extractor_rationale_87",
+      "app_core_extractor_unsupportedfiletypeerror",
+      "fitz",
+      "io",
+      "pathlib",
+      "pil",
+      "samples_generate_samples",
+      "samples_generate_samples_generate_fake_internship_pdf",
+      "samples_generate_samples_generate_legitimate_offer_pdf",
+      "samples_generate_samples_generate_phishing_sms_image",
+      "samples_generate_samples_generate_text_samples",
+      "samples_generate_samples_rationale_1",
+      "tests_test_extractor",
+      "tests_test_extractor_create_minimal_pdf_bytes",
+      "tests_test_extractor_create_minimal_png_bytes",
+      "tests_test_extractor_rationale_1",
+      "tests_test_extractor_test_corrupted_signature_rejection",
+      "tests_test_extractor_test_empty_file_rejection",
+      "tests_test_extractor_test_empty_text_rejection",
+      "tests_test_extractor_test_image_extraction",
+      "tests_test_extractor_test_pdf_extraction_digital",
+      "tests_test_extractor_test_text_extraction",
+      "tests_test_prompt_injection",
+      "tests_test_prompt_injection_rationale_1",
+      "tests_test_prompt_injection_test_adversarial_prompt_injection_does_not_suppress_rules"
+    ],
+    "1": [
+      "app_core_rules",
+      "app_core_rules_deterministicrule",
+      "app_core_rules_deterministicrule_evaluate",
+      "app_core_rules_freeemailsenderrule",
+      "app_core_rules_freeemailsenderrule_evaluate",
+      "app_core_rules_lookalikedomainrule",
+      "app_core_rules_lookalikedomainrule_evaluate",
+      "app_core_rules_messagingappmoverule",
+      "app_core_rules_messagingappmoverule_evaluate",
+      "app_core_rules_paymentrequestrule",
+      "app_core_rules_paymentrequestrule_evaluate",
+      "app_core_rules_rationale_1",
+      "app_core_rules_rationale_343",
+      "app_core_rules_rulesengine",
+      "app_core_rules_rulesengine_init",
+      "app_core_rules_rulesengine_run",
+      "app_core_rules_unrealisticofferrule",
+      "app_core_rules_unrealisticofferrule_evaluate",
+      "app_core_rules_urgencypressurerule",
+      "app_core_rules_urgencypressurerule_evaluate",
+      "app_core_rules_vagueroledetailsrule",
+      "app_core_rules_vagueroledetailsrule_evaluate",
+      "app_core_schemas_findingcategory",
+      "app_core_schemas_rulehit",
+      "app_core_schemas_severitylevel",
+      "str",
+      "tests_test_rules",
+      "tests_test_rules_rationale_1",
+      "tests_test_rules_test_free_email_corporate_sender",
+      "tests_test_rules_test_free_email_non_corporate",
+      "tests_test_rules_test_full_rules_engine_multi_hit",
+      "tests_test_rules_test_lookalike_domain",
+      "tests_test_rules_test_messaging_app_move",
+      "tests_test_rules_test_payment_rule_negation_contexts",
+      "tests_test_rules_test_payment_rule_positive",
+      "tests_test_rules_test_unrealistic_offer",
+      "tests_test_rules_test_urgency_rule"
+    ],
+    "2": [
+      "app_api_init",
+      "app_api_routes",
+      "app_api_routes_get_demo_samples",
+      "app_api_routes_health_check",
+      "app_api_routes_py_any",
+      "app_api_routes_py_get",
+      "app_api_routes_rationale_1",
+      "app_api_routes_rationale_112",
+      "app_api_routes_rationale_132",
+      "app_core_config",
+      "app_core_config_rationale_1",
+      "app_core_config_rationale_43",
+      "app_core_config_rationale_48",
+      "app_core_config_settings",
+      "app_core_config_settings_has_gemma_key",
+      "app_core_config_settings_sanitized_key_hint",
+      "app_core_schemas_analyzetextrequest",
+      "app_main",
+      "app_main_py_get",
+      "app_main_rate_limit_middleware",
+      "app_main_rationale_1",
+      "app_main_serve_index",
+      "collections",
+      "dotenv",
+      "fastapi",
+      "fastapi_middleware_cors",
+      "fastapi_responses",
+      "fastapi_staticfiles",
+      "middleware",
+      "os",
+      "request",
+      "time",
+      "uvicorn"
+    ],
+    "3": [
+      "app_core_gemma_client",
+      "app_core_gemma_client_gemmaapikeymissingerror",
+      "app_core_gemma_client_gemmaclient",
+      "app_core_gemma_client_gemmaclient_analyze",
+      "app_core_gemma_client_gemmaclient_build_retry_prompt",
+      "app_core_gemma_client_gemmaclient_build_text_prompt",
+      "app_core_gemma_client_gemmaclient_build_url",
+      "app_core_gemma_client_gemmaclient_clean_and_parse_json",
+      "app_core_gemma_client_gemmaclient_extract_content_from_response",
+      "app_core_gemma_client_gemmaclient_init",
+      "app_core_gemma_client_gemmaclient_send_request",
+      "app_core_gemma_client_gemmaclienterror",
+      "app_core_gemma_client_gemmaschemavalidationerror",
+      "app_core_gemma_client_py_any",
+      "app_core_gemma_client_py_exception",
+      "app_core_gemma_client_rationale_1",
+      "app_core_gemma_client_rationale_107",
+      "app_core_gemma_client_rationale_58",
+      "app_core_gemma_client_rationale_63",
+      "app_core_gemma_client_rationale_68",
+      "app_core_schemas_gemmaanalysisresult",
+      "asyncclient",
+      "base64",
+      "json",
+      "logging",
+      "pydantic",
+      "pytest",
+      "tests_test_schema_validation",
+      "tests_test_schema_validation_rationale_1",
+      "tests_test_schema_validation_test_reject_confidence_out_of_bounds",
+      "tests_test_schema_validation_test_reject_missing_required_fields",
+      "tests_test_schema_validation_test_reject_unexpected_extra_fields",
+      "tests_test_schema_validation_test_valid_schema"
+    ],
+    "4": [
+      "app_core_analyzer",
+      "app_core_analyzer_rationale_1",
+      "app_core_evidence",
+      "app_core_evidence_evidenceverifier",
+      "app_core_evidence_evidenceverifier_estimate_page",
+      "app_core_evidence_evidenceverifier_find_quote_in_text",
+      "app_core_evidence_evidenceverifier_verify_findings",
+      "app_core_evidence_normalize_whitespace",
+      "app_core_evidence_rationale_1",
+      "app_core_evidence_rationale_111",
+      "app_core_evidence_rationale_18",
+      "app_core_evidence_rationale_30",
+      "app_core_schemas_extractionmetadata",
+      "app_core_schemas_gemmafinding",
+      "app_core_schemas_provenancestatus",
+      "datetime",
+      "re",
+      "tests_test_evidence",
+      "tests_test_evidence_rationale_1",
+      "tests_test_evidence_test_fabricated_quote_quarantined",
+      "tests_test_evidence_test_image_provenance_honesty",
+      "tests_test_evidence_test_quote_verified_in_text",
+      "uuid"
+    ],
+    "5": [
+      "app_core_schemas",
+      "app_core_schemas_documenttype",
+      "app_core_schemas_healthresponse",
+      "app_core_schemas_rationale_1",
+      "app_core_schemas_risklevel",
+      "app_core_schemas_scorebreakdown",
+      "app_core_schemas_scoresignal",
+      "app_core_schemas_verifiedfinding",
+      "app_core_scoring",
+      "app_core_scoring_rationale_1",
+      "app_core_scoring_scoringengine",
+      "app_core_scoring_scoringengine_calculate_score",
+      "basemodel",
+      "enum",
+      "tests_test_scoring",
+      "tests_test_scoring_make_metadata",
+      "tests_test_scoring_rationale_1",
+      "tests_test_scoring_test_deduplication_between_ai_and_rules",
+      "tests_test_scoring_test_high_risk_scam_scoring",
+      "tests_test_scoring_test_low_risk_legitimate_scoring",
+      "tests_test_scoring_test_sparse_input_insufficient_information"
+    ],
+    "6": [
+      "app_api_routes_analyze_document",
+      "app_api_routes_analyze_text_json",
+      "app_api_routes_export_markdown",
+      "app_api_routes_rationale_144",
+      "app_api_routes_rationale_168",
+      "app_api_routes_rationale_181",
+      "app_core_analyzer_documentanalyzer",
+      "app_core_analyzer_documentanalyzer_analyze_file",
+      "app_core_analyzer_documentanalyzer_analyze_text",
+      "app_core_analyzer_documentanalyzer_run_pipeline",
+      "app_core_analyzer_rationale_29",
+      "app_core_analyzer_rationale_37",
+      "app_core_report",
+      "app_core_report_rationale_1",
+      "app_core_report_rationale_13",
+      "app_core_report_reportbuilder",
+      "app_core_report_reportbuilder_generate_markdown",
+      "app_core_schemas_analysisresponse",
+      "post",
+      "uploadfile"
+    ],
+    "7": [
+      "app_static_app",
+      "app_static_app_checkhealth",
+      "app_static_app_escapehtml",
+      "app_static_app_handlefileselected",
+      "app_static_app_hideerror",
+      "app_static_app_loadsamples",
+      "app_static_app_renderresults",
+      "app_static_app_setloading",
+      "app_static_app_showerror",
+      "app_static_app_switchtab",
+      "app_static_app_updatecharcount"
+    ],
+    "8": [
+      "app_core_domain_checks",
+      "app_core_domain_checks_domainanalyzer",
+      "app_core_domain_checks_domainanalyzer_evaluate_domain",
+      "app_core_domain_checks_domainanalyzer_extract_domains_and_links",
+      "app_core_domain_checks_py_any",
+      "app_core_domain_checks_rationale_1",
+      "app_core_domain_checks_rationale_28",
+      "typing",
+      "urllib_parse"
+    ],
+    "9": [
+      "asyncio",
+      "httpx",
+      "tests_test_api",
+      "tests_test_api_rationale_1",
+      "tests_test_api_test_analyze_text_json_endpoint",
+      "tests_test_api_test_export_markdown_endpoint",
+      "tests_test_api_test_health_endpoint",
+      "tests_test_api_test_samples_endpoint"
+    ],
+    "10": [
+      "app_core_init"
+    ],
+    "11": [
+      "app_init"
+    ]
+  },
+  "cohesion": {
+    "0": 0.10897435897435898,
+    "1": 0.16216216216216217,
+    "2": 0.07196969696969698,
+    "3": 0.10606060606060606,
+    "4": 0.20948616600790515,
+    "5": 0.22380952380952382,
+    "6": 0.15789473684210525,
+    "7": 0.2,
+    "8": 0.2777777777777778,
+    "9": 0.35714285714285715,
+    "10": 1.0,
+    "11": 1.0
+  },
+  "gods": [
+    {
+      "id": "app_core_schemas_rulehit",
+      "label": "RuleHit",
+      "degree": 27
+    },
+    {
+      "id": "app_core_schemas_severitylevel",
+      "label": "SeverityLevel",
+      "degree": 24
+    },
+    {
+      "id": "app_core_schemas_extractionmetadata",
+      "label": "ExtractionMetadata",
+      "degree": 22
+    },
+    {
+      "id": "app_core_schemas_findingcategory",
+      "label": "FindingCategory",
+      "degree": 21
+    },
+    {
+      "id": "app_core_schemas_provenancestatus",
+      "label": "ProvenanceStatus",
+      "degree": 19
+    },
+    {
+      "id": "app_core_extractor_documentextractor",
+      "label": "DocumentExtractor",
+      "degree": 18
+    },
+    {
+      "id": "app_core_evidence_evidenceverifier",
+      "label": "EvidenceVerifier",
+      "degree": 14
+    },
+    {
+      "id": "app_core_schemas_analysisresponse",
+      "label": "AnalysisResponse",
+      "degree": 14
+    },
+    {
+      "id": "app_core_schemas_gemmaanalysisresult",
+      "label": "GemmaAnalysisResult",
+      "degree": 13
+    },
+    {
+      "id": "app_core_rules_deterministicrule",
+      "label": "DeterministicRule",
+      "degree": 12
+    }
+  ],
+  "surprises": [
+    {
+      "source": "test_fabricated_quote_quarantined()",
+      "target": "FindingCategory",
+      "source_files": [
+        "tests/test_evidence.py",
+        "app/core/schemas.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "test_image_provenance_honesty()",
+      "target": "FindingCategory",
+      "source_files": [
+        "tests/test_evidence.py",
+        "app/core/schemas.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "test_quote_verified_in_text()",
+      "target": "FindingCategory",
+      "source_files": [
+        "tests/test_evidence.py",
+        "app/core/schemas.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "test_deduplication_between_ai_and_rules()",
+      "target": "FindingCategory",
+      "source_files": [
+        "tests/test_scoring.py",
+        "app/core/schemas.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "test_high_risk_scam_scoring()",
+      "target": "FindingCategory",
+      "source_files": [
+        "tests/test_scoring.py",
+        "app/core/schemas.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `RuleHit` connect `RuleHit` to `schemas.py`?",
+      "why": "High betweenness centrality (0.086) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 10 inferred relationships involving `RuleHit` (e.g. with `DeterministicRule` and `FreeEmailSenderRule`) actually correct?",
+      "why": "`RuleHit` has 10 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `test_extractor.py` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.10897435897435898 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `AnalysisResponse` connect `AnalysisResponse` to `routes.py`, `ExtractionMetadata`, `schemas.py`?",
+      "why": "High betweenness centrality (0.055) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 15 inferred relationships involving `SeverityLevel` (e.g. with `DeterministicRule` and `FreeEmailSenderRule`) actually correct?",
+      "why": "`SeverityLevel` has 15 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `routes.py` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.07196969696969698 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `ExtractionMetadata` connect `ExtractionMetadata` to `test_extractor.py`, `schemas.py`, `AnalysisResponse`?",
+      "why": "High betweenness centrality (0.055) - this node is a cross-community bridge."
+    }
+  ]
+}
